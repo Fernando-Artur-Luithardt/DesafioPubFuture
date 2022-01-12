@@ -12,7 +12,7 @@ $userId = $_SESSION['usuario']['id'];
 
 //validação não nulo
 
-if(empty($codBanco) || empty($tipoDeConta || $userId)) {
+if(empty($codBanco) || empty($tipoDeConta) || empty($userId)) {
     $response = array('mensagem' => "campos obrigatórios faltando");
     $responseJson = json_encode($response);
     http_response_code(400);
