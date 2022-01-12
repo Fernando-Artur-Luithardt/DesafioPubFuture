@@ -1,11 +1,21 @@
 <?php
 
+require('./../../auth.php');
 require('./../../banco.php');
 
-$sql = "SELECT * FROM `usuario` WHERE 0";
+$usuarios = array();
 
-$resultadosql = mysqli_query($conn, $sql);
+$sql = "SELECT usuario, id FROM `usuario`";
 
-var_dump($resultadosql);
+$consultaUsuarios = mysqli_query($conn,$sql);
+
+while ($arrUsuario = mysqli_fetch_array($consultaUsuarios)) {
+    $usuarios[] = [
+        'id' => $arrUsuario['id'],
+        'usuario' => $tiposConta[$arrConta['tipoOperacao']]
+    ];
+}
+
+echo json_encode($usuarios);
 
 ?>
