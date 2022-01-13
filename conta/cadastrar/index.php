@@ -5,6 +5,7 @@ require('./../../constantes.php');
 
 $nomeBanco = isset($_POST['nomeBanco'])? $_POST['nomeBanco']: "";
 $tipoDeConta = isset($_POST['tipoDeConta'])? $_POST['tipoDeConta']: "";
+$codConta = isset($_POST['codConta'])? $_POST['codConta']: "";
 
 $userId = $_SESSION['usuario']['id'];
 
@@ -39,7 +40,7 @@ if (!array_key_exists($tipoDeConta, $tiposConta)) {
 }
 
 //validar se conta existe no banco relaciona ao mesmo usuario
-$sql = "SELECT * FROM `conta` WHERE userId = '$userId' AND tipoDeConta = $tipoDeConta AND nomeBanco = $nomeBanco";
+$sql = "SELECT * FROM `conta` WHERE userId = '$userId' AND tipoDeConta = $tipoDeConta AND nomeBanco = $nomeBanco AND codConta = $codConta";
 
 $contaJaCadastrada = mysqli_query($conn, $sql);
 
@@ -51,7 +52,7 @@ if (mysqli_num_rows($contaJaCadastrada)>0) {
     exit;
 }
 //cadastro no banco
-$sql = "INSERT INTO `conta`(`nomeBanco`, `tipoDeConta`,`userId`) VALUES ('$nomeBanco','$tipoDeConta','$userId')";
+$sql = "INSERT INTO `conta`(`nomeBanco`, `tipoDeConta`,`userId`,`codConta`) VALUES ('$nomeBanco','$tipoDeConta','$userId','$codConta')";
 
 $resultado = mysqli_query($conn, $sql);
 
