@@ -12,7 +12,7 @@ $consultaUsuarios = mysqli_query($conn,$sql);
 while ($arrUsuario = mysqli_fetch_array($consultaUsuarios)) {
     $usuarios[] = [
         'id' => $arrUsuario['id'],
-        'usuario' => $tiposConta[$arrConta['tipoOperacao']]
+        'usuario' => $arrUsuario['usuario']
     ];
 }
 
