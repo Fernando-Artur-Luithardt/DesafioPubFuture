@@ -16,7 +16,7 @@ if(empty($usuario) || empty($senha)) {
 
 //validar se o usuário existe
 
-$sql = "SELECT * FROM `conta` WHERE usuario = '$usuario'";
+$sql = "SELECT * FROM `usuario` WHERE usuario = '$usuario'";
 
 $usuariosCadastrados = mysqli_query($conn, $sql);
 
