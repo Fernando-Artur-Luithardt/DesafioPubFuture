@@ -5,7 +5,7 @@ $tiposConta = [
     '222' => 'Conta Corrente'
 ];
 
-$codBancos = [
+$nomeBancos = [
     '01' => 'nuBank'
 ];
 

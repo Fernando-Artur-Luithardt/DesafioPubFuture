@@ -3,7 +3,7 @@ require('./../../auth.php');
 require('./../../banco.php');
 require('./../../constantes.php');
 
-$codBanco = isset($_POST['codBanco'])? $_POST['codBanco']: "";
+$nomeBanco = isset($_POST['nomeBanco'])? $_POST['nomeBanco']: "";
 $tipoDeConta = isset($_POST['tipoDeConta'])? $_POST['tipoDeConta']: "";
 
 $userId = $_SESSION['usuario']['id'];
@@ -12,7 +12,7 @@ $userId = $_SESSION['usuario']['id'];
 
 //validação não nulo
 
-if(empty($codBanco) || empty($tipoDeConta) || empty($userId)) {
+if(empty($nomeBanco) || empty($tipoDeConta) || empty($userId)) {
     $response = array('mensagem' => "campos obrigatórios faltando");
     $responseJson = json_encode($response);
     http_response_code(400);
@@ -22,8 +22,7 @@ if(empty($codBanco) || empty($tipoDeConta) || empty($userId)) {
 
 //validar se código do banco é válido
 
-
-if (!array_key_exists($codBanco, $codBancos)) {
+if (!array_key_exists($nomeBanco, $nomeBancos)) {
     $response = array('mensagem' => "o código do banco está incorreto");
     $responseJson = json_encode($response);
     http_response_code(400);
@@ -40,7 +39,7 @@ if (!array_key_exists($tipoDeConta, $tiposConta)) {
 }
 
 //validar se conta existe no banco relaciona ao mesmo usuario
-$sql = "SELECT * FROM `conta` WHERE userId = '$userId' AND tipoDeConta = $tipoDeConta AND codBanco = $codBanco";
+$sql = "SELECT * FROM `conta` WHERE userId = '$userId' AND tipoDeConta = $tipoDeConta AND nomeBanco = $nomeBanco";
 
 $contaJaCadastrada = mysqli_query($conn, $sql);
 
@@ -52,7 +51,7 @@ if (mysqli_num_rows($contaJaCadastrada)>0) {
     exit;
 }
 //cadastro no banco
-$sql = "INSERT INTO `conta`(`codBanco`, `tipoDeConta`,`userId`) VALUES ('$codBanco','$tipoDeConta','$userId')";
+$sql = "INSERT INTO `conta`(`nomeBanco`, `tipoDeConta`,`userId`) VALUES ('$nomeBanco','$tipoDeConta','$userId')";
 
 $resultado = mysqli_query($conn, $sql);
 
