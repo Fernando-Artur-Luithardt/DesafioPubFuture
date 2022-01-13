@@ -39,7 +39,7 @@ if (mysqli_num_rows($contaVsUsuario)==0) {
     exit;
 }
 //cadastro no banco
-$sql = "INSERT INTO `despesas` (`categoria`, `codConta`,`contaId`,`dataPrevista`,`descricao`,`valor`) VALUES ('$categoria','$codConta','$contaId','$dataPrevista','$descricao','$valor')";
+$sql = "INSERT INTO `despesas` (`categoria`, `codConta`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`) VALUES ('$categoria','$codConta','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor')";
 
 $resultado = mysqli_query($conn, $sql);
 
