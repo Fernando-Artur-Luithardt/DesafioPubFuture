@@ -32,7 +32,7 @@ $sql = "SELECT * FROM `conta` WHERE userId = '$userId' AND codConta = $codConta"
 $contaVsUsuario = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($contaVsUsuario)==0) {
-    $response = array('mensagem' => "Conta não pertence ao usuario logado");
+    $response = array('mensagem' => "codido conta incorreto ou não pertence ao usuario logado");
     $responseJson = json_encode($response);
     http_response_code(400);
     echo $responseJson;
@@ -51,14 +51,13 @@ if (!$resultado) {
     exit;
 }
 
-// retornando a nova conta em um json
+// retornando a nova despesa
 
 $idConta = mysqli_insert_id($conn);
-$sql = "SELECT * FROM `conta` WHERE id = '$idConta'";
+$sql = "SELECT * FROM `despesas` WHERE id = '$idConta'";
 $novaConta = mysqli_query($conn, $sql);
 
 $response = array(
-    'mensagem' => "OK",
     'conta' => mysqli_fetch_object($novaConta)
 );
 $responseJson = json_encode($response);
