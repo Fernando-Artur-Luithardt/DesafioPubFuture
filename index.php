@@ -15,23 +15,24 @@ require 'banco.php';
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="container">
-        <div>
-            <h1>login</h1>
-        </div>
-        <div class="input">
-            <input type="text">
-        </div>
+    <form action='chamar()'>
+        <div id="container">
+            <div>
+                <h1>login</h1>
+            </div>
+            <div class="input" id="nome">
+                <input type="text">
+            </div>
 
-        <div class="input">
-            <input type="text">
-        </div>
+            <div class="input" id="senha">
+                <input type="password">
+            </div>
 
-        <div>
-            <button onclick="chamar()">login</button>
+            <div>
+                <input onclick="chamar()" type="submit">
+            </div>
         </div>
-    </div>
-
+    </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
@@ -44,7 +45,7 @@ dados.append('senha', '1234');
 
 $.ajax({
     type: "POST",
-    url: 'http://localhost/DesafioPubFuture/usuario/cadastrar/',
+    url: 'http://localhost/DesafioPubFuture/usuario/login/',
     data: dados,
     processData: false,
     contentType: false,
