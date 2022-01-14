@@ -7,7 +7,7 @@ $senha = isset($_POST['senha'])? $_POST['senha']: "";
 //validação não nulo
 
 if(empty($usuario) || empty($senha)) {
-    $response = array('mensagem' => "Usuario e senha obrigatórios");
+    $response = array('mensagem' => "Usuario e senha obrigatorios");
     $responseJson = json_encode($response);
     http_response_code(400);
     echo $responseJson;
