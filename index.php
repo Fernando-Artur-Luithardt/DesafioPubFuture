@@ -15,21 +15,21 @@ require 'banco.php';
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form action='chamar()'>
+    <form id="form">
         <div id="container">
             <div>
                 <h1>login</h1>
             </div>
-            <div class="input" id="nome">
-                <input type="text">
+            <div type="input" >
+                <input name="usuario" type="text" id="usuario">
             </div>
 
-            <div class="input" id="senha">
-                <input type="password">
+            <div type="input">
+                <input name="senha" type="password" id="senha">
             </div>
 
             <div>
-                <input onclick="chamar()" type="submit">
+                <input type="submit">
             </div>
         </div>
     </form>
@@ -37,23 +37,47 @@ require 'banco.php';
 
 <script>
 
-    function chamar(){
-        let dados = new FormData();
+    // function chamar(){
+    // let dados = new FormData();
 
-dados.append('usuario', 'fedsadarnando');
-dados.append('senha', '1234');
+//     dados.append('usuario', 'fedsadarnando');
+//     dados.append('senha', '1234');
 
-$.ajax({
-    type: "POST",
-    url: 'http://localhost/DesafioPubFuture/usuario/login/',
-    data: dados,
-    processData: false,
-    contentType: false,
-    success: function(resposta){
-    window.location.replace('http://localhost/desafioPubFuture/controle.php');
-    console.log(resposta)
-    }
-})  }
+// $.ajax({
+//     type: "POST",
+//     url: 'http://localhost/DesafioPubFuture/usuario/login/',
+//     data: dados,
+//     processData: false,
+//     contentType: false,
+//     success: function(resposta){
+//     window.location.replace('http://localhost/desafioPubFuture/controle.php');
+//     console.log(resposta)
+//     }
+// })  }
+
+$(document).ready(function () {
+  $("form").submit(function (event) {
+    var formData = {
+        usuario: $("#usuario").val(),
+        senha: $("#senha").val(),
+    };
+
+    console.log(formData);
+
+    $.ajax({
+      type: "POST",
+      url: "http://localhost/DesafioPubFuture/usuario/login/",
+      data: formData,
+      dataType: "json",
+      encode: true,
+    }).done(function (data) {
+      window.location.replace('http://localhost/desafioPubFuture/controle.php');
+      console.log(data);
+    });
+
+    event.preventDefault();
+  });
+});
 
 
 </script>
