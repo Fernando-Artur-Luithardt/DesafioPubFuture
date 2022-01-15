@@ -56,7 +56,7 @@ if (empty($ativo)) {
     $ativo = 0;
 }
 //cadastro no banco
-$sql = "INSERT INTO `despesas` (`categoria`, `codConta`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`) VALUES ('$categoria','$codConta','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor')";
+$sql = "INSERT INTO `despesas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`) VALUES ('$categoria','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor')";
 
 $resultado = mysqli_query($conn, $sql);
 

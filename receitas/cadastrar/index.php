@@ -55,7 +55,7 @@ if (empty($dataEntrada)) {
 if (empty($ativo)) {
     $ativo = 0;
 }
-$sql = "INSERT INTO `receitas` (`categoria`, `codConta`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`) VALUES ('$categoria','$codConta','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor')";
+$sql = "INSERT INTO `receitas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`) VALUES ('$categoria','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor')";
 
 $resultado = mysqli_query($conn, $sql);
 
