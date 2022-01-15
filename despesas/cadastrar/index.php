@@ -71,7 +71,7 @@ if (!$resultado) {
 // retornando a nova despesa
 
 $idConta = mysqli_insert_id($conn);
-$sql = "SELECT * FROM `despesas` WHERE id = '$idConta'";
+$sql = "SELECT * FROM `despesas` WHERE contaId = '$idConta'";
 $novaConta = mysqli_query($conn, $sql);
 
 $response = array(
