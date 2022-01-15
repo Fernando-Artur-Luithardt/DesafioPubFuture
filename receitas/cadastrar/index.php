@@ -37,15 +37,9 @@ if (mysqli_num_rows($contaVsUsuario)==0) {
     echo $responseJson;
     exit;
 }
-//cadastro no banco
-$valor = +$valor;
-if ($valor > 0) {
-    $response = array('mensagem' => "erro ao passar valor de despesas, passar para api somente o valor em módulo");
-    $responseJson = json_encode($response);
-    http_response_code(400);
-    echo $responseJson;
-    exit;
-}
+//garante valor da receita positiva
+$valor = +abs($valor);
+
 //se a data estiver vazia será lançada como data e hora atual
 if (empty($dataEntrada)) {
     $dataEntrada = date("Y-m-d H:i:s");
@@ -55,6 +49,7 @@ if (empty($dataEntrada)) {
 if (empty($ativo)) {
     $ativo = 0;
 }
+//passando valores para o banco
 $sql = "INSERT INTO `receitas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`) VALUES ('$categoria','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor')";
 
 $resultado = mysqli_query($conn, $sql);
@@ -70,7 +65,7 @@ if (!$resultado) {
 // retornando a nova despesa
 
 $idConta = mysqli_insert_id($conn);
-$sql = "SELECT * FROM `receitas` WHERE contaId = '$idConta'";
+$sql = "SELECT * FROM `receitas` WHERE contaId = $idConta";
 $novaConta = mysqli_query($conn, $sql);
 
 $response = array(

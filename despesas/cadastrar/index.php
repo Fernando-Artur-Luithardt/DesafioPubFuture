@@ -37,20 +37,15 @@ if (mysqli_num_rows($contaVsUsuario)==0) {
     echo $responseJson;
     exit;
 }
-//validação de valor
-$valor = -$valor;
-if ($valor < 0) {
-    $response = array('mensagem' => "erro ao passar valor de despesas, passar para api somente o valor em módulo");
-    $responseJson = json_encode($response);
-    http_response_code(400);
-    echo $responseJson;
-    exit;
-}
+//garante o valor da despesa como negativo
+$valor = -abs($valor);
+
 //se a data estiver vazia será lançada como data e hora atual
 if (empty($dataEntrada)) {
     $dataEntrada = date("Y-m-d H:i:s");
     $ativo = 1;
     $sql = "UPDATE `conta` SET saldo=saldo+$valor WHERE codConta = $codConta AND userId = $userId";
+    $update = mysqli_query($conn, $sql);
 }
 if (empty($ativo)) {
     $ativo = 0;
@@ -69,9 +64,8 @@ if (!$resultado) {
 }
 
 // retornando a nova despesa
-
 $idConta = mysqli_insert_id($conn);
-$sql = "SELECT * FROM `despesas` WHERE contaId = '$idConta'";
+$sql = "SELECT * FROM `despesas` WHERE contaId = $idConta";
 $novaConta = mysqli_query($conn, $sql);
 
 $response = array(
