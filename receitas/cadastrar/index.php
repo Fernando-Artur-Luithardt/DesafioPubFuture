@@ -50,7 +50,7 @@ if (empty($ativo)) {
     $ativo = 0;
 }
 //passando valores para o banco
-$sql = "INSERT INTO `receitas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`) VALUES ('$categoria','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor')";
+$sql = "INSERT INTO `receitas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`,`ativo`) VALUES ('$categoria','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor','$ativo')";
 
 $resultado = mysqli_query($conn, $sql);
 

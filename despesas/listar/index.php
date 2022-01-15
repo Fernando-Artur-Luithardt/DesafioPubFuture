@@ -4,7 +4,7 @@ require('./../../auth.php');
 require('./../../banco.php');
 require('./../../constantes.php');
 
-$usuarios = array();
+$despesasArr = array();
 $id = $_SESSION['usuario']['id'];
 $id = $userId;
 $codConta = isset($_POST['codConta'])? $_POST['codConta']: "";
@@ -21,7 +21,7 @@ $sql = "SELECT * FROM `conta` WHERE userId = '$userId' AND codConta = $codConta"
 $contaVsUsuario = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($contaVsUsuario)==0) {
-    $response = array('mensagem' => "codido conta incorreto ou não pertence ao usuario logado");
+    $response = array('mensagem' => "codigo de conta incorreto ou não pertence ao usuario logado");
     $responseJson = json_encode($response);
     http_response_code(400);
     echo $responseJson;
