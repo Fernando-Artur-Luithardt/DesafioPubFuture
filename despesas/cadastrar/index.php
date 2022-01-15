@@ -51,7 +51,7 @@ if (empty($ativo)) {
     $ativo = 0;
 }
 //cadastro no banco
-$sql = "INSERT INTO `despesas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`) VALUES ('$categoria','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor')";
+$sql = "INSERT INTO `despesas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`,`codConta`,`ativo`) VALUES ('$categoria','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor','$codConta','$ativo')";
 
 $resultado = mysqli_query($conn, $sql);
 
@@ -65,11 +65,11 @@ if (!$resultado) {
 
 // retornando a nova despesa
 $idConta = mysqli_insert_id($conn);
-$sql = "SELECT * FROM `despesas` WHERE contaId = $idConta";
+$sql = "SELECT * FROM `despesas` WHERE id = $idConta";
 $novaConta = mysqli_query($conn, $sql);
 
 $response = array(
-    'conta' => mysqli_fetch_object($novaConta)
+    mysqli_fetch_object($novaConta)
 );
 $responseJson = json_encode($response);
 echo $responseJson;
