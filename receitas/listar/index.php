@@ -6,7 +6,6 @@ require('./../../constantes.php');
 
 $receitasArr = array();
 $id = $_SESSION['usuario']['id'];
-$id = $userId;
 $codConta = isset($_POST['codConta'])? $_POST['codConta']: "";
 
 if(empty($codConta)) {
@@ -18,7 +17,7 @@ if(empty($codConta)) {
 }
 
 //validar se conta pertence ao usuario logado
-$sql = "SELECT * FROM `conta` WHERE userId = '$userId' AND codConta = $codConta";
+$sql = "SELECT * FROM `conta` WHERE userId = '$id' AND codConta = $codConta";
 $contaVsUsuario = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($contaVsUsuario)==0) {
