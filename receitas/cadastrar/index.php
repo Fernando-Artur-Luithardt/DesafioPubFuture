@@ -13,8 +13,8 @@ $ativo = ""; //controlado pelo sistema, se não receber data, a data tera valor 
             //sendo assim o valor será cadastrado no saldo da conta automaticamente, caso a data venha diferente
             //da data atual, é necessário um sistema para que o valor caia no dia correto
             //no momento não tive tempo para este sistema, mas será feito posteriormente para estudos
-$userId = $_SESSION['usuario']['id'];
-$contaId = $userId;
+$userId = $_SESSION['usuario']['id']; //$contaId = 'userId';
+
 
 //validação não nulo
 if(empty($valor) || empty($descricao) || empty($userId) || empty($codConta)) {
@@ -51,7 +51,7 @@ if (empty($ativo)) {
     $ativo = 0;
 }
 //passando valores para o banco
-$sql = "INSERT INTO `receitas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`,`ativo`) VALUES ('$categoria','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor','$ativo')";
+$sql = "INSERT INTO `receitas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`,`ativo`,`codConta`) VALUES ('$categoria','$userId','$dataPrevista','$dataEntrada','$descricao','$valor','$ativo','$codConta')";
 
 $resultado = mysqli_query($conn, $sql);
 
