@@ -42,7 +42,7 @@ if (mysqli_query($conn,$sql)) {
     exit;
 }
 
-$response = array('mensagem' => "Erro ao deletar usuario");
+$response = array('mensagem' => "Erro ao deletar despesa");
 $responseJson = json_encode($response);
 http_response_code(400);
 echo $responseJson;
