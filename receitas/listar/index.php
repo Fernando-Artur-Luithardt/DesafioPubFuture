@@ -29,11 +29,12 @@ if (mysqli_num_rows($contaVsUsuario)==0) {
     exit;
 }
 
-$sql = "SELECT categoria, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `receitas` WHERE codConta = $codConta";   
+$sql = "SELECT id, categoria, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `receitas` WHERE codConta = $codConta";   
 $consultaReceitas = mysqli_query($conn,$sql);
 
 while ($receitas = mysqli_fetch_array($consultaReceitas)) {
     $receitasArr[] = [
+        'id' => $receitas['id'],
         'categoria' => $receitas['categoria'],
         'codConta' => $receitas['codConta'],
         'dataEntrada' => $receitas['dataEntrada'],

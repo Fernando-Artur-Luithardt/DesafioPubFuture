@@ -28,11 +28,12 @@ if (mysqli_num_rows($contaVsUsuario)==0) {
     exit;
 }
 
-$sql = "SELECT categoria, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `despesas` WHERE codConta = $codConta";   
+$sql = "SELECT id, categoria, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `despesas` WHERE codConta = $codConta";   
 $consultaDespesas = mysqli_query($conn,$sql);
 
 while ($despesas = mysqli_fetch_array($consultaDespesas)) {
     $despesasArr[] = [
+        'id' => $despesas['id'],
         'categoria' => $despesas['categoria'],
         'codConta' => $despesas['codConta'],
         'dataEntrada' => $despesas['dataEntrada'],
