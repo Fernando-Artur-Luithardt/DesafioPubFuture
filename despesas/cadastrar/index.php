@@ -9,6 +9,10 @@ $dataEntrada = isset($_POST['dataEntrada'])? $_POST['dataEntrada']: "";
 $dataPrevista = isset($_POST['dataPrevista'])? $_POST['dataPrevista']: NULL;
 $descricao = isset($_POST['descricao'])? $_POST['descricao']: "";
 $valor = isset($_POST['valor'])? $_POST['valor']: "";
+$ativo = ""; //controlado pelo sistema, se não receber data, a data tera valor de data e hora atual,
+            //sendo assim o valor será cadastrado no saldo da conta automaticamente, caso a data venha diferente
+            //da data atual, é necessário um sistema para que o valor caia no dia correto
+            //no momento não tive tempo para este sistema, mas será feito posteriormente para estudos
 
 $userId = $_SESSION['usuario']['id'];
 $contaId = $userId;
@@ -21,12 +25,7 @@ if(empty($valor) || empty($descricao) || empty($userId) || empty($codConta)) {
     echo $responseJson;
     exit;
 }
-
-if (empty($dataEntrada)) {
-    $dataEntrada = date("Y-m-d H:i:s");
-}
-
-//validar se conta existe no banco relaciona ao mesmo usuario
+//validar se conta pertence ao usuario logado
 $sql = "SELECT * FROM `conta` WHERE userId = '$userId' AND codConta = $codConta";
 
 $contaVsUsuario = mysqli_query($conn, $sql);
@@ -38,15 +37,25 @@ if (mysqli_num_rows($contaVsUsuario)==0) {
     echo $responseJson;
     exit;
 }
-//cadastro no banco
+//validação de valor
 $valor = -$valor;
-if ($valor > 0) {
+if ($valor < 0) {
     $response = array('mensagem' => "erro ao passar valor de despesas, passar para api somente o valor em módulo");
     $responseJson = json_encode($response);
     http_response_code(400);
     echo $responseJson;
     exit;
 }
+//se a data estiver vazia será lançada como data e hora atual
+if (empty($dataEntrada)) {
+    $dataEntrada = date("Y-m-d H:i:s");
+    $ativo = 1;
+    $sql = "UPDATE `conta` SET saldo=saldo+$valor WHERE codConta = $codConta AND userId = $userId";
+}
+if (empty($ativo)) {
+    $ativo = 0;
+}
+//cadastro no banco
 $sql = "INSERT INTO `despesas` (`categoria`, `codConta`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`) VALUES ('$categoria','$codConta','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor')";
 
 $resultado = mysqli_query($conn, $sql);
