@@ -14,9 +14,9 @@ $consultaUsuarios = mysqli_query($conn,$sql);
 while ($contasBancarias = mysqli_fetch_array($consultaUsuarios)) {
     $usuarios[] = [
         'codConta' => $contasBancarias['codConta'],
-        'nomeBanco' => $contasBancarias['nomeBanco'],
+        'nomeBanco' => $nomeBancos[$contasBancarias['nomeBanco']],
         'saldo' => $contasBancarias['saldo'],
-        'tipoDeConta' => $contasBancarias['tipoDeConta'],
+        'tipoDeConta' => $tiposConta[$contasBancarias['tipoDeConta']],
     ];
 }
 
