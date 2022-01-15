@@ -6,6 +6,7 @@ require('./../../constantes.php');
 
 $usuarios = array();
 $id = $_SESSION['usuario']['id'];
+$id = $userId;
 $codConta = isset($_POST['codConta'])? $_POST['codConta']: "";
 
 if(empty($codConta)) {
