@@ -39,6 +39,14 @@ if (mysqli_num_rows($contaVsUsuario)==0) {
     exit;
 }
 //cadastro no banco
+$valor = -$valor;
+if ($valor > 0) {
+    $response = array('mensagem' => "erro ao passar valor de despesas, passar para api somente o valor em módulo");
+    $responseJson = json_encode($response);
+    http_response_code(400);
+    echo $responseJson;
+    exit;
+}
 $sql = "INSERT INTO `despesas` (`categoria`, `codConta`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`) VALUES ('$categoria','$codConta','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor')";
 
 $resultado = mysqli_query($conn, $sql);
