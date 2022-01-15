@@ -45,6 +45,7 @@ if (empty($dataEntrada)) {
     $dataEntrada = date("Y-m-d H:i:s");
     $ativo = 1;
     $sql = "UPDATE `conta` SET saldo=saldo+$valor WHERE codConta = $codConta AND userId = $userId";
+    $update = mysqli_query($conn, $sql);
 }
 if (empty($ativo)) {
     $ativo = 0;
@@ -65,7 +66,7 @@ if (!$resultado) {
 // retornando a nova despesa
 
 $idConta = mysqli_insert_id($conn);
-$sql = "SELECT * FROM `receitas` WHERE contaId = $idConta";
+$sql = "SELECT * FROM `receitas` WHERE id = $idConta";
 $novaConta = mysqli_query($conn, $sql);
 
 $response = array(
