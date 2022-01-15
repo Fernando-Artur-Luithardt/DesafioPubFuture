@@ -15,8 +15,19 @@ if(empty($codConta)) {
     echo $responseJson;
     exit;
 }
+//validar se conta pertence ao usuario logado
+$sql = "SELECT * FROM `conta` WHERE userId = '$userId' AND codConta = $codConta";
+$contaVsUsuario = mysqli_query($conn, $sql);
 
-$sql = "SELECT categoria, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `despesas` WHERE userId = $codConta";   
+if (mysqli_num_rows($contaVsUsuario)==0) {
+    $response = array('mensagem' => "codido conta incorreto ou não pertence ao usuario logado");
+    $responseJson = json_encode($response);
+    http_response_code(400);
+    echo $responseJson;
+    exit;
+}
+
+$sql = "SELECT categoria, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `despesas` WHERE codConta = $codConta";   
 $consultaDespesas = mysqli_query($conn,$sql);
 
 while ($despesas = mysqli_fetch_array($consultaDespesas)) {
