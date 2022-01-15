@@ -4,7 +4,7 @@ require('./../../auth.php');
 require('./../../banco.php');
 require('./../../constantes.php');
 
-$usuarios = array();
+$contas = array();
 $id = $_SESSION['usuario']['id'];
 
 $sql = "SELECT codConta, nomeBanco, saldo, tipoDeConta FROM `conta` WHERE userId = $id";
@@ -12,7 +12,7 @@ $sql = "SELECT codConta, nomeBanco, saldo, tipoDeConta FROM `conta` WHERE userId
 $consultaUsuarios = mysqli_query($conn,$sql);
 
 while ($contasBancarias = mysqli_fetch_array($consultaUsuarios)) {
-    $usuarios[] = [
+    $contas[] = [
         'codConta' => $contasBancarias['codConta'],
         'nomeBanco' => $nomeBancos[$contasBancarias['nomeBanco']],
         'saldo' => $contasBancarias['saldo'],
@@ -20,6 +20,6 @@ while ($contasBancarias = mysqli_fetch_array($consultaUsuarios)) {
     ];
 }
 
-echo json_encode($usuarios);
+echo json_encode($contas);
 
 ?>
