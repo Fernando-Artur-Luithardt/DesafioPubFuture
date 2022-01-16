@@ -6,12 +6,16 @@ require('./../../contaVsUsuario.php');
 
 $id = $_SESSION['usuario']['id'];
 $codConta = isset($_POST['codConta'])? $_POST['codConta']: "";
+$deletar = isset($_POST['deletar'])? $_POST['deletar']: "";
 
 $sql = "DELETE from `conta` WHERE userId = $id AND codConta = $codConta";
 
-if (mysqli_query($conn,$sql)) {
-    http_response_code(200);
-    exit;
+if($deletar == 1) {
+    if (mysqli_query($conn,$sql)) {
+        http_response_code(204);
+        session_destroy();
+        exit;
+    }
 }
 
 $response = array('mensagem' => "Erro ao deletar conta");
