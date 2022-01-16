@@ -32,16 +32,16 @@ if (mysqli_num_rows($contaVsUsuario)==0) {
 $sql = "SELECT id, categoria, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `receitas` WHERE dataEntrada BETWEEN $dataInicial and $dataFinal ORDER BY dataEntrada ASC";   
 $consultaReceitas = mysqli_query($conn,$sql);
 
-while ($despesasData = mysqli_fetch_array($consultaReceitas)) {
+while ($receitasData = mysqli_fetch_array($consultaReceitas)) {
     $receitasArr[] = [
-        'id' => $despesasData['id'],
-        'categoria' => $despesasData['categoria'],
-        'codConta' => $despesasData['codConta'],
-        'dataEntrada' => $despesasData['dataEntrada'],
-        'dataPrevista' => $despesasData['dataPrevista'],
-        'descricao' => $despesasData['descricao'],
-        'valor' => $despesasData['valor'],
-        'ativo' => $despesasData['ativo'],
+        'id' => $receitasData['id'],
+        'categoria' => $tiposReceitas[$receitasData['categoria']],
+        'codConta' => $receitasData['codConta'],
+        'dataEntrada' => $receitasData['dataEntrada'],
+        'dataPrevista' => $receitasData['dataPrevista'],
+        'descricao' => $receitasData['descricao'],
+        'valor' => $receitasData['valor'],
+        'ativo' => $receitasData['ativo'],
     ];
 }
 

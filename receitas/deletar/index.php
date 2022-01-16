@@ -38,7 +38,6 @@ $sql = "DELETE from `receitas` userId = '$userId' AND contaId = $codConta AND id
 
 if (mysqli_query($conn,$sql)) {
     http_response_code(204);
-    session_destroy();
     exit;
 }
 

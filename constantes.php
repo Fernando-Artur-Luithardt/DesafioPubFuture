@@ -25,5 +25,10 @@ $tiposDespesas = [
     '9' => 'lazer',
     '10' => 'transporte'
 ];
+$tiposReceitas = [
+    '1' => 'salário',
+    '2' => 'investimento',
+    '3' => 'presente',
+];
 
 ?>

@@ -37,6 +37,15 @@ if (mysqli_num_rows($contaVsUsuario)==0) {
     echo $responseJson;
     exit;
 }
+//validar se categoria existe como código de tipo de receita
+
+if (!array_key_exists($categoria, $tiposReceitas)) {
+    $response = array('mensagem' => "o código categoria da despesa está incorreto");
+    $responseJson = json_encode($response);
+    http_response_code(400);
+    echo $responseJson;
+    exit;
+}
 //garante valor da receita positiva
 $valor = +abs($valor);
 
