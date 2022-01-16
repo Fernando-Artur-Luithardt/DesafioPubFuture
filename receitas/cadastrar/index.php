@@ -17,7 +17,7 @@ $ativo = ""; //controlado pelo sistema, se não receber data, a data tera valor 
 $userId = $_SESSION['usuario']['id']; //$contaId = 'userId';
 
 //validação não nulo
-if(empty($valor) || empty($descricao) || empty($userId) || empty($codConta)) {
+if(empty($valor) || empty($descricao) || empty($userId) || empty($codConta) || empty($tipoReceita)) {
     $response = array('mensagem' => "campos obrigatórios faltando");
     $responseJson = json_encode($response);
     http_response_code(400);

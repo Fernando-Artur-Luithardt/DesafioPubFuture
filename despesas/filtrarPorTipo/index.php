@@ -18,7 +18,7 @@ if(empty($codConta) || empty($tipoDespesa)) {
     exit;
 }
 
-$sql = "SELECT id, tipoDespesa, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `despesas` WHERE codConta = $codConta AND categoria = $tipoDespesa";   
+$sql = "SELECT id, tipoDespesa, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `despesas` WHERE codConta = $codConta AND tipoDespesa = $tipoDespesa";   
 $consultaDespesas = mysqli_query($conn,$sql);
 
 while ($despesas = mysqli_fetch_array($consultaDespesas)) {

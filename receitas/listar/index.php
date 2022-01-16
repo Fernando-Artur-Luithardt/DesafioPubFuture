@@ -17,13 +17,12 @@ if(empty($codConta)) {
     exit;
 }
 
-$sql = "SELECT id, categoria, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `receitas` WHERE codConta = $codConta";   
+$sql = "SELECT tipoReceita, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `receitas` WHERE codConta = $codConta";   
 $consultaReceitas = mysqli_query($conn,$sql);
 
 while ($receitas = mysqli_fetch_array($consultaReceitas)) {
     $receitasArr[] = [
-        'id' => $receitas['id'],
-        'tipoDespesa' => $tiposReceitas[$receitas['tipoDespesa']],
+        'tipoReceita' => $tiposReceitas[$receitas['tipoReceita']],
         'codConta' => $receitas['codConta'],
         'dataEntrada' => $receitas['dataEntrada'],
         'dataPrevista' => $receitas['dataPrevista'],
