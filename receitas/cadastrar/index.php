@@ -4,7 +4,7 @@ require('./../../banco.php');
 require('./../../constantes.php');
 require('./../../contaVsUsuario.php');
 
-$categoria = isset($_POST['categoria'])? $_POST['categoria']: "";
+$categoriaReceita = isset($_POST['categoria'])? $_POST['categoria']: "";
 $codConta = isset($_POST['codConta'])? $_POST['codConta']: "";
 $dataEntrada = isset($_POST['dataEntrada'])? $_POST['dataEntrada']: "";
 $dataPrevista = isset($_POST['dataPrevista'])? $_POST['dataPrevista']: NULL;
@@ -16,7 +16,6 @@ $ativo = ""; //controlado pelo sistema, se não receber data, a data tera valor 
             //no momento não tive tempo para este sistema, mas será feito posteriormente para estudos
 $userId = $_SESSION['usuario']['id']; //$contaId = 'userId';
 
-
 //validação não nulo
 if(empty($valor) || empty($descricao) || empty($userId) || empty($codConta)) {
     $response = array('mensagem' => "campos obrigatórios faltando");
@@ -26,14 +25,6 @@ if(empty($valor) || empty($descricao) || empty($userId) || empty($codConta)) {
     exit;
 }
 
-//validar se categoria existe como código de tipo de receita
-if (!array_key_exists($categoria, $tiposReceitas)) {
-    $response = array('mensagem' => "o código categoria da despesa está incorreto");
-    $responseJson = json_encode($response);
-    http_response_code(400);
-    echo $responseJson;
-    exit;
-}
 //garante valor da receita positiva
 $valor = +abs($valor);
 
@@ -48,8 +39,7 @@ if (empty($ativo)) {
     $ativo = 0;
 }
 //passando valores para o banco
-$sql = "INSERT INTO `receitas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`,`ativo`,`codConta`) VALUES ('$categoria','$userId','$dataPrevista','$dataEntrada','$descricao','$valor','$ativo','$codConta')";
-
+$sql = "INSERT INTO `receitas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`,`ativo`,`codConta`) VALUES ('$categoriaReceita','$userId','$dataPrevista','$dataEntrada','$descricao','$valor','$ativo','$codConta')";
 $resultado = mysqli_query($conn, $sql);
 
 if (!$resultado) {

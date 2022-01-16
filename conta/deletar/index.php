@@ -7,7 +7,6 @@ require('./../../contaVsUsuario.php');
 $id = $_SESSION['usuario']['id'];
 $codConta = isset($_POST['codConta'])? $_POST['codConta']: "";
 
-
 $sql = "DELETE from `conta` WHERE userId = $id AND codConta = $codConta";
 
 if (mysqli_query($conn,$sql)) {

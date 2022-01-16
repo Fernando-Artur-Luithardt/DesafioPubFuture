@@ -4,14 +4,12 @@ require('./../../auth.php');
 require('./../../banco.php');
 require('./../../constantes.php');
 
-
 $userId = $_SESSION['usuario']['id'];
 $codContaPartida = isset($_POST['codContaPartida'])? $_POST['codContaPartida']: "";
 $codContaDestino = isset($_POST['codContaDestino'])? $_POST['codContaDestino']: "";
 $valorTransferencia = isset($_POST['valorTransferencia'])? $_POST['valorTransferencia']: "";
 $tipoDeContaPartida = isset($_POST['tipoDeContaPartida'])? $_POST['tipoDeContaPartida']: "";
 $tipoDeContaDestino = isset($_POST['tipoDeContaDestino'])? $_POST['tipoDeContaDestino']: "";
-
 
 //confere se a conta de partida existe no banco e se relaciona ao usuario logado
 $sql = "SELECT * FROM `conta` WHERE userId = '$userId' AND codConta = $codContaPartida AND tipoDeConta = $tipoDeContaPartida";

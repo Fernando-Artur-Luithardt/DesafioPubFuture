@@ -4,7 +4,7 @@ require('./../../banco.php');
 require('./../../constantes.php');
 require('./../../contaVsUsuario.php');
 
-$categoria = isset($_POST['categoria'])? $_POST['categoria']: "";
+$categoriaDespesa = isset($_POST['categoria'])? $_POST['categoria']: "";
 $codConta = isset($_POST['codConta'])? $_POST['codConta']: "";
 $dataEntrada = isset($_POST['dataEntrada'])? $_POST['dataEntrada']: "";
 $dataPrevista = isset($_POST['dataPrevista'])? $_POST['dataPrevista']: NULL;
@@ -26,9 +26,9 @@ if(empty($valor) || empty($descricao) || empty($userId) || empty($codConta)) {
     echo $responseJson;
     exit;
 }
-//validar se categoria existe como código de tipo dedespesa
+//validar se categoria existe como código de tipo de despesa
 
-if (!array_key_exists($categoria, $tiposDespesas)) {
+if (!array_key_exists($categoriaDespesa, $tiposDespesas)) {
     $response = array('mensagem' => "o código categoria da está incorreto");
     $responseJson = json_encode($response);
     http_response_code(400);
@@ -50,7 +50,7 @@ if (empty($ativo)) {
     $ativo = 0;
 }
 //cadastro no banco
-$sql = "INSERT INTO `despesas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`,`codConta`,`ativo`) VALUES ('$categoria','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor','$codConta','$ativo')";
+$sql = "INSERT INTO `despesas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`,`codConta`,`ativo`) VALUES ('$categoriaDespesa','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor','$codConta','$ativo')";
 
 $resultado = mysqli_query($conn, $sql);
 
