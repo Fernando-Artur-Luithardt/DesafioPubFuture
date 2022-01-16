@@ -21,7 +21,7 @@ $sql = "SELECT * FROM `usuario` WHERE usuario = '$usuario'";
 $usuariosCadastrados = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($usuariosCadastrados)>0) {
-    $response = array('mensagem' => "Usuário já existente");
+    $response = array('mensagem' => "Usuario ja existente");
     $responseJson = json_encode($response);
     http_response_code(400);
     echo $responseJson;

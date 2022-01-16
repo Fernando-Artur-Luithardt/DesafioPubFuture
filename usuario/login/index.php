@@ -1,6 +1,9 @@
 <?php
 require('./../../banco.php');
 
+session_start();
+session_destroy();
+
 $usuario = isset($_POST['usuario'])? $_POST['usuario']: "";
 $senha = isset($_POST['senha'])? $_POST['senha']: "";
 
