@@ -1,5 +1,4 @@
 <?php
-
 require('./../../auth.php');
 require('./../../banco.php');
 require('./../../constantes.php');
@@ -25,7 +24,7 @@ $consultaReceitas = mysqli_query($conn,$sql);
 while ($receitasData = mysqli_fetch_array($consultaReceitas)) {
     $receitasArr[] = [
         'id' => $receitasData['id'],
-        'categoria' => $tiposReceitas[$receitasData['categoria']],
+        'tipoReceita' => $tiposReceitas[$receitasData['tipoReceita']],
         'codConta' => $receitasData['codConta'],
         'dataEntrada' => $receitasData['dataEntrada'],
         'dataPrevista' => $receitasData['dataPrevista'],

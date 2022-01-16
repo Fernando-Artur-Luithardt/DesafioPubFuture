@@ -4,7 +4,7 @@ require('./../../banco.php');
 require('./../../constantes.php');
 require('./../../contaVsUsuario.php');
 
-$categoriaReceita = isset($_POST['categoria'])? $_POST['categoria']: "";
+$tipoReceita = isset($_POST['tipoReceita'])? $_POST['tipoReceita']: "";
 $codConta = isset($_POST['codConta'])? $_POST['codConta']: "";
 $dataEntrada = isset($_POST['dataEntrada'])? $_POST['dataEntrada']: "";
 $dataPrevista = isset($_POST['dataPrevista'])? $_POST['dataPrevista']: NULL;
@@ -39,7 +39,7 @@ if (empty($ativo)) {
     $ativo = 0;
 }
 //passando valores para o banco
-$sql = "INSERT INTO `receitas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`,`ativo`,`codConta`) VALUES ('$categoriaReceita','$userId','$dataPrevista','$dataEntrada','$descricao','$valor','$ativo','$codConta')";
+$sql = "INSERT INTO `receitas` (`tipoReceita`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`,`ativo`,`codConta`) VALUES ('$tipoReceita','$userId','$dataPrevista','$dataEntrada','$descricao','$valor','$ativo','$codConta')";
 $resultado = mysqli_query($conn, $sql);
 
 if (!$resultado) {
@@ -51,7 +51,6 @@ if (!$resultado) {
 }
 
 // retornando a nova despesa
-
 $idConta = mysqli_insert_id($conn);
 $sql = "SELECT * FROM `receitas` WHERE id = $idConta";
 $novaConta = mysqli_query($conn, $sql);

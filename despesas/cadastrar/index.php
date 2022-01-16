@@ -4,7 +4,7 @@ require('./../../banco.php');
 require('./../../constantes.php');
 require('./../../contaVsUsuario.php');
 
-$categoriaDespesa = isset($_POST['categoria'])? $_POST['categoria']: "";
+$tipoDespesa = isset($_POST['tipoDespesa'])? $_POST['tipoDespesa']: "";
 $codConta = isset($_POST['codConta'])? $_POST['codConta']: "";
 $dataEntrada = isset($_POST['dataEntrada'])? $_POST['dataEntrada']: "";
 $dataPrevista = isset($_POST['dataPrevista'])? $_POST['dataPrevista']: NULL;
@@ -41,7 +41,7 @@ if (empty($ativo)) {
     $ativo = 0;
 }
 //cadastro no banco
-$sql = "INSERT INTO `despesas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`,`codConta`,`ativo`) VALUES ('$categoriaDespesa','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor','$codConta','$ativo')";
+$sql = "INSERT INTO `despesas` (`tipoDespesa`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`,`codConta`,`ativo`) VALUES ('$tipoDespesa','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor','$codConta','$ativo')";
 $resultado = mysqli_query($conn, $sql);
 
 if (!$resultado) {

@@ -8,23 +8,23 @@ require('./../../contaVsUsuario.php');
 $despesasArr = array();
 $userId = $_SESSION['usuario']['id'];
 $codConta = isset($_POST['codConta'])? $_POST['codConta']: "";
-$categoriaDespesa = isset($_POST['categoria'])? $_POST['categoria']: "";
+$tipoDespesa = isset($_POST['tipoDespesa'])? $_POST['tipoDespesa']: "";
 
-if(empty($codConta) || empty($categoriaDespesa)) {
-    $response = array('mensagem' => "necessário codConta e categoriadespesa para filtrar despesas");
+if(empty($codConta) || empty($tipoDespesa)) {
+    $response = array('mensagem' => "necessário codConta e tipoDespesa para filtrar despesas");
     $responseJson = json_encode($response);
     http_response_code(400);
     echo $responseJson;
     exit;
 }
 
-$sql = "SELECT id, categoria, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `despesas` WHERE codConta = $codConta AND categoria = $categoriaDespesa";   
+$sql = "SELECT id, tipoDespesa, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `despesas` WHERE codConta = $codConta AND categoria = $tipoDespesa";   
 $consultaDespesas = mysqli_query($conn,$sql);
 
 while ($despesas = mysqli_fetch_array($consultaDespesas)) {
     $despesasArr[] = [
         'id' => $despesas['id'],
-        'categoria' => $tiposDespesas[$despesas['categoria']],
+        'tipoDespesa' => $tiposDespesas[$despesas['tipoDespesa']],
         'codConta' => $despesas['codConta'],
         'dataEntrada' => $despesas['dataEntrada'],
         'dataPrevista' => $despesas['dataPrevista'],

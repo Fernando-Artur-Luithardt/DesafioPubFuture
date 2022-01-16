@@ -17,13 +17,13 @@ if(empty($codConta)) {
     exit;
 }
 
-$sql = "SELECT id, categoria, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `despesas` WHERE codConta = $codConta";   
+$sql = "SELECT id, categoriaDespesa, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `despesas` WHERE codConta = $codConta";   
 $consultaDespesas = mysqli_query($conn,$sql);
 
 while ($despesas = mysqli_fetch_array($consultaDespesas)) {
     $despesasArr[] = [
         'id' => $despesas['id'],
-        'categoria' => $tiposDespesas[$despesas['categoria']],
+        'tipoDespesa' => $tiposDespesas[$despesas['tipoDespesa']],
         'codConta' => $despesas['codConta'],
         'dataEntrada' => $despesas['dataEntrada'],
         'dataPrevista' => $despesas['dataPrevista'],
