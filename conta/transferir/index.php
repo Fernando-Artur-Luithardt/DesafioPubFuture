@@ -13,6 +13,7 @@ $id = $_SESSION['usuario']['id'];
 $codContaPartida = isset($_POST['codContaPartida'])? $_POST['codContaPartida']: "";
 $codContaDestino = isset($_POST['codContaDestino'])? $_POST['codContaDestino']: "";
 $valorTransferencia = isset($_POST['valorTransferencia'])? $_POST['valorTransferencia']: "";
+$valorTransferencia = abs($valorTransferencia);
 
 $sql = "SELECT  saldo FROM `conta` WHERE userId = $id AND codConta = $codContaPartida";
 
