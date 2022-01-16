@@ -25,6 +25,16 @@ if(empty($valor) || empty($descricao) || empty($userId) || empty($codConta)) {
     echo $responseJson;
     exit;
 }
+//validar se categoria existe como código de tipo dedespesa
+
+if (!array_key_exists($categoria, $tiposDespesas)) {
+    $response = array('mensagem' => "o código categoria da despesa está incorreto");
+    $responseJson = json_encode($response);
+    http_response_code(400);
+    echo $responseJson;
+    exit;
+}
+
 //validar se conta pertence ao usuario logado
 $sql = "SELECT * FROM `conta` WHERE userId = '$userId' AND codConta = $codConta";
 
