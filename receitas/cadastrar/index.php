@@ -47,6 +47,9 @@ if (!$resultado) {
     $responseJson = json_encode($response);
     http_response_code(500);
     echo $responseJson;
+    $ativo = 0;
+    $sql = "UPDATE `conta` SET saldo=saldo-$valor WHERE codConta = $codConta AND userId = $userId";
+    $update = mysqli_query($conn, $sql);
     exit;
 }
 
