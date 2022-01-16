@@ -2,6 +2,7 @@
 require('./../../auth.php');
 require('./../../banco.php');
 require('./../../constantes.php');
+require('./../../contaVsUsuario.php');
 
 $categoria = isset($_POST['categoria'])? $_POST['categoria']: "";
 $codConta = isset($_POST['codConta'])? $_POST['codConta']: "";
@@ -25,20 +26,7 @@ if(empty($valor) || empty($descricao) || empty($userId) || empty($codConta)) {
     exit;
 }
 
-//validar se conta pertence ao usuario logado
-$sql = "SELECT * FROM `conta` WHERE userId = '$userId' AND codConta = $codConta";
-
-$contaVsUsuario = mysqli_query($conn, $sql);
-
-if (mysqli_num_rows($contaVsUsuario)==0) {
-    $response = array('mensagem' => "codido conta incorreto ou não pertence ao usuario logado");
-    $responseJson = json_encode($response);
-    http_response_code(400);
-    echo $responseJson;
-    exit;
-}
 //validar se categoria existe como código de tipo de receita
-
 if (!array_key_exists($categoria, $tiposReceitas)) {
     $response = array('mensagem' => "o código categoria da despesa está incorreto");
     $responseJson = json_encode($response);
