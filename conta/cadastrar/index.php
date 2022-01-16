@@ -29,18 +29,6 @@ if (mysqli_num_rows($contaJaCadastrada)>0) {
     exit;
 }
 
-//validar se codConta já existe no sistema
-$sql = "SELECT * FROM `conta` WHERE codConta = $codConta";
-$contaJaCadastrada = mysqli_query($conn, $sql);
-
-if (mysqli_num_rows($contaJaCadastrada)>0) {
-    $response = array('mensagem' => "codConta já cadastrado no sistema");
-    $responseJson = json_encode($response);
-    http_response_code(400);
-    echo $responseJson;
-    exit;
-}
-
 //cadastro no banco
 $sql = "INSERT INTO `conta`(`nomeBanco`, `tipoDeConta`,`userId`,`codConta`) VALUES ('$nomeBanco','$tipoDeConta','$userId','$codConta')";
 $resultado = mysqli_query($conn, $sql);

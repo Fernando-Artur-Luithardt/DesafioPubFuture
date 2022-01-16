@@ -19,7 +19,7 @@ if(empty($codConta) || empty($dataInicial) || empty($dataFinal)) {
     exit;
 }
 
-$sql = "SELECT id, categoria, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `despesas` WHERE dataEntrada BETWEEN $dataInicial and $dataFinal ORDER BY dataEntrada ASC";   
+$sql = "SELECT id, tipoDespesa, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `despesas` WHERE codConta = $codConta AND dataEntrada BETWEEN $dataInicial and $dataFinal ORDER BY dataEntrada ASC";   
 $consultaDespesas = mysqli_query($conn,$sql);
 
 while ($despesasData = mysqli_fetch_array($consultaDespesas)) {

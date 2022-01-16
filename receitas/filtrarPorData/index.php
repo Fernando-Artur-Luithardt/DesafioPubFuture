@@ -18,7 +18,7 @@ if(empty($codConta) || empty($dataInicial) || empty($dataFinal)) {
     exit;
 }
 
-$sql = "SELECT id, categoria, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `receitas` WHERE dataEntrada BETWEEN $dataInicial and $dataFinal ORDER BY dataEntrada ASC";   
+$sql = "SELECT id, tipoReceita, codConta, dataEntrada, dataPrevista, descricao, valor, ativo FROM `receitas` WHERE codConta = $codConta AND dataEntrada BETWEEN $dataInicial and $dataFinal AND codConta = $codConta ORDER BY dataEntrada ASC";   
 $consultaReceitas = mysqli_query($conn,$sql);
 
 while ($receitasData = mysqli_fetch_array($consultaReceitas)) {
