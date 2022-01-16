@@ -12,11 +12,11 @@ body{
     text-align: center;
 }
 
-.input{
+#inputs{
     margin: 8px;
 }
 
-#container{
+#form{
     padding: 30px 15px 30px 15px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

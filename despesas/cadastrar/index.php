@@ -26,15 +26,6 @@ if(empty($valor) || empty($descricao) || empty($userId) || empty($codConta)) {
     echo $responseJson;
     exit;
 }
-//validar se categoria existe como código de tipo de despesa
-
-if (!array_key_exists($categoriaDespesa, $tiposDespesas)) {
-    $response = array('mensagem' => "o código categoria da está incorreto");
-    $responseJson = json_encode($response);
-    http_response_code(400);
-    echo $responseJson;
-    exit;
-}
 
 //garante o valor da despesa como negativo
 $valor = -abs($valor);
@@ -51,7 +42,6 @@ if (empty($ativo)) {
 }
 //cadastro no banco
 $sql = "INSERT INTO `despesas` (`categoria`,`contaId`,`dataPrevista`,`dataEntrada`,`descricao`,`valor`,`codConta`,`ativo`) VALUES ('$categoriaDespesa','$contaId','$dataPrevista','$dataEntrada','$descricao','$valor','$codConta','$ativo')";
-
 $resultado = mysqli_query($conn, $sql);
 
 if (!$resultado) {

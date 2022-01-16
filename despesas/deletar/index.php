@@ -10,7 +10,6 @@ $idDespesa = isset($_POST['idDespesa'])? $_POST['idDespesa']: "";
 
 //validar se despesa pertence a conta do usuário logado
 $sql = "SELECT * FROM `despesas` WHERE userId = '$userId' AND contaId = $codConta AND id = '$idDespesa'";
-
 $despesaVsUsuario = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($despesaVsUsuario)==0) {

@@ -10,7 +10,7 @@ $userId = $_SESSION['usuario']['id'];
 $codConta = isset($_POST['codConta'])? $_POST['codConta']: "";
 
 if(empty($codConta)) {
-    $response = array('mensagem' => "necessário codConta para listar despesas");
+    $response = array('mensagem' => "necessário codConta para listar receitas");
     $responseJson = json_encode($response);
     http_response_code(400);
     echo $responseJson;
